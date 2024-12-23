@@ -1,0 +1,193 @@
+<%- include('./partials/header') -%>
+<link rel="stylesheet" href="/style.css" />
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="card w-[450px] bg-white shadow-lg rounded-lg p-6">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-semibold text-blue-600">EcomPare</h1>
+      <p class="text-gray-600">
+        Melden Sie sich an oder erstellen Sie ein Konto
+      </p>
+    </div>
+    <div class="tabs">
+      <div class="tabs-list flex justify-between mb-4 border-b">
+        <button
+          class="tabs-trigger px-12 py-4 text-sm font-medium text-gray-600 border-b-2 border-blue-600 active"
+          data-tab="login"
+        >
+          Anmelden
+        </button>
+        <button
+          class="tabs-trigger px-12 py-4 text-sm font-medium text-gray-600 border-b-2"
+          data-tab="register"
+        >
+          Registrieren
+        </button>
+      </div>
+      <!-- Login-Tab -->
+      <div class="tabs-content" id="login">
+        <form action="/" method="POST" class="space-y-4">
+          <div>
+            <label for="email-login" class="block text-sm font-medium w-32"
+              >E-Mail</label
+            >
+            <input
+              id="email-login"
+              name="email"
+              type="email"
+              class="input w-full border-gray-300"
+              placeholder="name@example.com"
+              required
+            />
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium w-32"
+              >Passwort</label
+            >
+            <div class="relative">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                class="input w-full border-gray-300"
+                placeholder="••••••••"
+                required
+              />
+              <i class="absolute right-2 top-3 cursor-pointer fas fa-eye"></i>
+            </div>
+          </div>
+          <button
+            class="btn btn-primary w-full bg-blue-600 text-white py-2 rounded-md"
+          >
+            Anmelden
+          </button>
+        </form>
+        <div class="mt-4 text-right">
+          <a
+            href="/forgot-password"
+            class="text-sm text-blue-600 hover:underline"
+            >Passwort vergessen?</a
+          >
+        </div>
+      </div>
+      <!-- Register-Tab -->
+      <div class="tabs-content hidden" id="register">
+        <form action="/" method="POST" class="space-y-4">
+          <div>
+            <label for="forename" class="block text-sm font-medium"
+              >Vorname</label
+            >
+            <input
+              id="forename"
+              name="forename"
+              type="text"
+              class="input w-full border-gray-300"
+              placeholder="Vorname"
+              required
+            />
+          </div>
+          <div>
+            <label for="surname" class="block text-sm font-medium"
+              >Nachname</label
+            >
+            <input
+              id="surname"
+              name="surname"
+              type="text"
+              class="input w-full border-gray-300"
+              placeholder="Nachname"
+              required
+            />
+          </div>
+          <div>
+            <label for="email-register" class="block text-sm font-medium"
+              >E-Mail</label
+            >
+            <input
+              id="email-register"
+              name="email"
+              type="email"
+              class="input w-full border-gray-300"
+              placeholder="name@example.com"
+              required
+            />
+          </div>
+          <div>
+            <label for="password-register" class="block text-sm font-medium"
+              >Passwort</label
+            >
+            <input
+              id="password-register"
+              name="password"
+              type="password"
+              class="input w-full border-gray-300"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+          <button
+            class="btn btn-primary w-full bg-blue-600 text-white py-2 rounded-md"
+          >
+            Konto erstellen
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="my-4 text-center">
+      <div class="flex items-center justify-between">
+        <span class="w-full border"></span>
+        <span class="px-4 text-sm text-gray-500">Oder fortfahren mit</span>
+        <span class="w-full border"></span>
+      </div>
+      <div class="flex justify-center space-x-4 mt-4">
+        <button class="btn btn-outline flex items-center space-x-2">
+          <i class="fab fa-google"></i>
+          <span>Google</span>
+        </button>
+        <button class="btn btn-outline flex items-center space-x-2">
+          <i class="fab fa-facebook"></i>
+          <span>Facebook</span>
+        </button>
+        <button class="btn btn-outline flex items-center space-x-2">
+          <i class="fab fa-apple"></i>
+          <span>Apple</span>
+        </button>
+      </div>
+    </div>
+    <div class="text-sm text-center text-gray-500">
+      Durch die Anmeldung akzeptieren Sie unsere
+      <a href="/terms" class="underline text-blue-600">Nutzungsbedingungen</a>
+      und
+      <a href="/privacy" class="underline text-blue-600"
+        >Datenschutzrichtlinie</a
+      >.
+    </div>
+  </div>
+</div>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const triggers = document.querySelectorAll(".tabs-trigger");
+    const contents = document.querySelectorAll(".tabs-content");
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        console.log("Tab gewechselt zu:", trigger.dataset.tab);
+        // Entferne die aktive Klasse von allen Tabs und Inhalten
+        triggers.forEach((btn) => btn.classList.remove("active"));
+        contents.forEach((content) => content.classList.remove("active"));
+
+        // Füge die aktive Klasse für den angeklickten Tab hinzu
+        trigger.classList.add("active");
+        const target = document.getElementById(trigger.dataset.tab);
+
+        // Zeige den gewünschten Tab-Inhalt
+        contents.forEach((content) => content.classList.add("hidden")); // Verstecke alle Inhalte
+        target.classList.remove("hidden"); // Zeige den aktuellen Inhalt
+      });
+    });
+  });
+</script>
